@@ -9,20 +9,31 @@ Description: 堆栈相关函数
 
 package general
 
-import "runtime"
+import (
+	"path/filepath"
+	"runtime"
+	"strings"
+)
 
 // GetCallerInfo 获取调用者信息
 //
 // 返回：
+//   - 调用者所在文件名（不带后缀）
 //   - 调用者的函数名
 //   - 调用者所在行号
-func GetCallerInfo() (string, int) {
+func GetCallerInfo() (string, string, int) {
 	// runtime.Caller 的参数 skip 是要上升的堆栈数，0 表示 runtime.Caller 的调用者，1 表示 GetCallerInfo 的调用者，以此类推
-	pc, _, line, ok := runtime.Caller(2)
+	pc, fullFilePath, line, ok := runtime.Caller(2)
 	if !ok {
-		return "", 0
+		return "", "", 0
 	}
-	function := runtime.FuncForPC(pc).Name()
 
-	return function, line
+	// 获取文件名
+	file := strings.Split(filepath.Base(fullFilePath), ".")[0]
+
+	// 获取函数名
+	functionSplit := strings.Split(runtime.FuncForPC(pc).Name(), ".")
+	function := functionSplit[len(functionSplit)-1]
+
+	return file, function, line
 }

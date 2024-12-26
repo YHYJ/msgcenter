@@ -21,6 +21,6 @@ import (
 // 参数：
 //   - err: 原始错误信息
 func PrintErrorMsg(err error) {
-	functionName, lineNo := general.GetCallerInfo()
-	color.Printf("%s %s\n", general.SecondaryText("[", functionName, ":", lineNo-1, "]"), general.DangerText(err))
+	fileName, functionName, lineNo := general.GetCallerInfo()
+	color.Printf("%s %s\n", general.SecondaryText("[", fileName, ".", functionName, ":", lineNo-1, "]"), general.DangerText(err))
 }

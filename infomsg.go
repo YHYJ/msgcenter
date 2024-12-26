@@ -23,13 +23,3 @@ import (
 func PrintInfoMsg(info string) {
 	color.Printf("%s\n", general.LightText(info))
 }
-
-// PrintSuccessMsg 格式化原始成功信息后输出
-//
-//   - 输出格式为：成功信息
-//
-// 参数：
-//   - info: 原始成功信息
-func PrintSuccessMsg(success string) {
-	color.Printf("%s %s\n", general.SuccessFlag, general.SuccessText(success))
-}

@@ -21,5 +21,5 @@ import (
 // 参数：
 //   - warn: 原始警告信息
 func PrintWarnMsg(warn string) {
-	color.Printf("%s %s\n", general.WarningFlag, general.WarnText(warn))
+	color.Printf("%s\n", general.WarnText(warn))
 }
